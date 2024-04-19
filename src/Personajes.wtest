@@ -1,0 +1,89 @@
+import personajes.*
+import frutas.*
+import juegos.*
+
+test "Martin no esta feliz" {
+
+	assert.notThat(martin.estaFeliz())   // si se usa that aca y el error que salta es "no encontro un valor verdadero" -quiere decir que el  	
+							//quiere decir que el test fallo,  no el codigo
+							// es decir, fallo el resultado esperado
+}
+
+test "Martin compra una manzana"{
+	
+	//hay que hacer que martin compre la manzana
+	martin.comprar(manzana)
+	
+	//devolver el methodo que retome la despensa
+	//metodo equals 
+	// neceista el valor con el cual se va a comparar, ej manzana
+	//seg, lo q se espera q e ejecute
+	
+	assert.equals(manzana,martin.enLaDespensa() )  //primer argumento lo que espero, segun arg lo q espero q se ejecute
+	
+}
+
+
+test "Martin se alimenta con la manzana que ya maduro"{
+	manzana.madura()   
+	martin.comprar(manzana)
+	// para darle un valor de neergia a la manzana
+	// damos la orden de alimentarse
+	martin.alimentarse()
+	assert.equals(80 + 14 , martin.energia())
+	
+	// traduccion
+	// 80 energia inicial + los 14 de la manzana
+	// tiene que ser igual a la energia de marrtin
+	//
+	//
+	//y por ultimo tendria que validar que en la despensa haya agua:
+	assert.equals(agua, martin.enLaDespensa() )
+	//
+	// aca preg si tiene hambre
+	assert.notThat(martin.tieneHambre())
+	//
+	//preg si esta feliz
+	assert.that(martin.estaFeliz())
+}
+
+test "Martin se alimenta con una mandarina de 60 gr"{
+	
+	mandarina.peso(60)
+	martin.comprar(mandarina)
+	martin.alimentarse()
+	
+	assert.equals(80+12 , martin.energia() )
+	assert.equals(agua, martin.enLaDespensa())
+	assert.notThat(martin.tieneHambre())
+	assert.that(martin.estaFeliz())
+}
+
+
+test "Martin se alimenta con banana"{
+	
+	martin.comprar(banana)
+	martin.alimentarse()
+	
+	assert.equals(80+5 , martin.energia() )
+	assert.equals(agua, martin.enLaDespensa())
+	assert.notThat(martin.tieneHambre())
+	assert.that(martin.estaFeliz())
+}
+
+test "Martin se alimenta solo con agua" { //aca la energia no deberia cambiar
+	
+	martin.comprar(agua)
+	martin.alimentarse()
+	
+	assert.equals(80 , martin.energia() )
+	assert.equals(agua, martin.enLaDespensa())
+	assert.notThat(martin.tieneHambre())
+	assert.that(martin.estaFeliz())
+	
+}
+test "Martin juega al voley 15 minunutos"{
+	voley.cantidadDeMinutos(15)
+	martin.hacerDeporte(voley)
+	assert.equals(80-30, martin.energia())
+}
